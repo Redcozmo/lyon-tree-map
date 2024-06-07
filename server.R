@@ -17,8 +17,8 @@ server <- function(input, output) {
   # Update active tabsetpanel when submit selection
   observeEvent(input$selection_submit, {
     print("In input$selection_submit")
-    updateTabsetPanel(inputId = "tabpanels",
-                      selected = "map")
+    updateTabItems(inputId = "sidebarmenu",
+                   selected = "menu_item_map")
   })
 
   # Observe selected tree

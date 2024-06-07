@@ -3,10 +3,10 @@
 ################################################################################
 
 # Source UI files
-source('partials/tab_panel_parameters.R')
-# source('partials/tab_panel_graphics.R')
-source('partials/tab_panel_map.R')
-source('partials/tab_panel_table.R')
+source('partials/tab_item_parameters.R')
+source('partials/tab_item_graphics.R')
+source('partials/tab_item_map.R')
+source('partials/tab_item_table.R')
 
 # Dashboard header
 #------------------------------------------------------------------------------#
@@ -15,10 +15,13 @@ header <- dashboardHeader(title = "Arbres de Lyon")
 # Dashboard sidebar
 #------------------------------------------------------------------------------#
 sidebar <- dashboardSidebar(
-  sidebarMenu(
-    menuItem("Carte", tabName = "dashboard"),
-    menuItem("Explication", tabName = "explanation")
-    # menuItem("Analyse des données", tabName = "analysis_report")
+  sidebarMenu(id = "sidebarmenu",
+    menuItem("Paramètres", tabName = "menu_item_params"),
+    menuItem("Carte", tabName = "menu_item_map"),
+    menuItem("Table", tabName = "menu_item_table"),
+    menuItem("Graphiques", tabName = "menu_item_graphics"),
+    menuItem("Explication", tabName = "menu_item_explanation")
+    # menuItem("Analyse des données", tabName = "menu_item_analysis_report")
   )
 )
 
@@ -36,26 +39,15 @@ body <- dashboardBody(
       }
     "))
     ),
-    
     tabItems(
-      tabItem(tabName = "dashboard",
-              
-              # Application title
-              titlePanel(h1("")),
-              
-              tabsetPanel(id = "tabpanels",
-                          p(),
-                          tab_panel_parameters,
-                          # tab_panel_graphics,
-                          tab_panel_map,
-                          tab_panel_table
-              )
-      ),
-      tabItem(tabName = "explanation",
-              p(),
+      tab_item_parameters,
+      tab_item_map,
+      tab_item_table,
+      tab_item_graphics,
+      tabItem(tabName = "menu_item_explanation",
               shiny::includeMarkdown(path = "pages/explanation.md")
       ),
-      tabItem(tabName = "analysis_report",
+      tabItem(tabName = "menu_item_analysis_report",
               shiny::includeMarkdown(path = "pages/analysis_report.md")
       )
     )
