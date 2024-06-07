@@ -1,0 +1,102 @@
+---
+title: "Analyse statistique"
+author: "Josselin GIFFARD-CARLET"
+date: "`r Sys.Date()`"
+output: md_document
+---
+
+```{r setup, include=FALSE, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Titre
+
+```{r libraries, echo=FALSE}
+library("corrplot")
+library("PerformanceAnalytics")
+library("dplyr")
+```
+
+## Including Plots
+
+```{r data, echo=FALSE}
+trees_df_sel <- trees_df %>%
+  select(perimeter_cm, height_m, crown_diameter_m, plantation_date) %>%
+  filter(!is.na(plantation_date)) %>%
+  filter(plantation_date > 1900)
+```
+
+
+```{r corrplot, echo=FALSE}
+M <- cor(trees_df_sel)
+par(mfrow = c(1, 1))
+corrplot(M, method="color", addCoef.col = "black")
+```
+
+
+```{r pairs, echo=FALSE}
+trees_df_sel %>% pairs
+```
+
+
+```{r performanceAnalytics, echo=FALSE}
+# PerformanceAnalytics::chart.Correlation(trees_df_sel, histogram=TRUE, pch=19)
+```
+
+
+```{r data_var, echo=FALSE}
+A <- trees_sf$perimeter_cm
+B <- trees_sf$height_m
+```
+
+
+```{r scatterplot, echo=FALSE}
+plot(B ~ A, xlab = "Circonférence (cm)", ylab = "Hauteur (m)")
+# smoothScatter(A, B, nrpoints = 10, xlab = "Circonférence (cm)", ylab = "Hauteur (m)")
+```
+
+
+```{r hist, echo=FALSE}
+par(mfrow = c(1, 2))
+hist(A, main = "Périmètre", breaks = 25)
+hist(B, main = "Hauteur", breaks = 50)
+```
+
+
+```{r qplot, echo=FALSE}
+par(mfrow = c(1, 2))
+qqnorm(A); qqline(A)
+qqnorm(B); qqline(B)
+```
+
+
+```{r cor, echo=FALSE}
+cor(A,B, method="pearson")
+# cor.test(A,B, method="kendall")
+```
+
+# Nombre d'arbres plantés par année et par commune
+
+```{r tree_by_date_and_town, echo=FALSE}
+sel <- trees_df %>%
+  filter(!is.na(plantation_date)) %>%
+  filter(plantation_date > 2000) %>%
+  # filter(town == "ALBIGNY-SUR-SAONE") %>%
+  group_by(plantation_date) %>%
+  count() %>%
+  select(plantation_date, n)
+barplot(height = sel$n, names.arg = sel$plantation_date, las = 2)
+```
+
+
+# Densité d'arbre référencés par superficie de commune
+
+```{r tree_density_by_town, echo=FALSE}
+
+```
+
+# Densité d'arbre à partir du MNH lidar HD de l'IGN
+
+```{r tree_canopy_MNH_lidar, echo=FALSE}
+
+```
