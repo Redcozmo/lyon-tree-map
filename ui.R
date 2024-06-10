@@ -39,6 +39,9 @@ body <- dashboardBody(
       }
     "))
     ),
+    # For valueboxes
+    tags$style(".small-box{border-radius: 5px}"),
+    
     tabItems(
       tab_item_parameters,
       tab_item_map,

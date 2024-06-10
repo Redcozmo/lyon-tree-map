@@ -108,5 +108,10 @@ tab_item_parameters <-
               )
             )
           ),
-          fluidRow()
+          fluidRow(
+            valueBoxOutput("valueBox_trees_nb"),
+            valueBoxOutput("valueBox_genus_sel_nb"),
+            valueBoxOutput("valueBox_tallest"),
+            valueBoxOutput("valueBox_largest")
+          )
   )

@@ -28,7 +28,7 @@ tree_infos <- function(tree) {
         paste("Genre", tree$genus, sep = ' : '),
         paste("Espèce", tree$species, sep = ' : '),
         paste("Variété", tree$variety, sep = ' : '),
-        paste("Circonférence du tronc (cm)", tree$perimeter_cm, sep = ' : '),
+        paste("Diamètre du tronc (m)", tree$diameter_m, sep = ' : '),
         paste("Hauteur totale (m)", tree$height_m, sep = ' : '),
         paste("Diamètre du houppier (m)", tree$crown_diameter_m, sep = ' : '),
         paste("Planté en", tree$plantation_date, sep = ' : '),

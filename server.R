@@ -7,6 +7,8 @@ server <- function(input, output) {
   values <- reactiveValues(
     trees_nb = NULL,
     genus_sel_nb = NULL,
+    tallest_tree = NULL,
+    largest_tree = NULL,
     map_parameters = NULL, # unused for the moment
     loc_found = NULL,
     loc_click = NULL,
@@ -17,7 +19,7 @@ server <- function(input, output) {
   # Update active tabsetpanel when submit selection
   observeEvent(input$selection_submit, {
     print("In input$selection_submit")
-    updateTabItems(inputId = "sidebarmenu",
+    shinydashboard::updateTabItems(inputId = "sidebarmenu",
                    selected = "menu_item_map")
   })
 
@@ -107,7 +109,7 @@ server <- function(input, output) {
 
   # Update of species number "values$trees_nb" for town selection
   observe({
-    print("In obseve values$trees_nb")
+    print("In observe values$trees_nb")
     values$trees_nb <- trees_sf %>%
       st_drop_geometry() %>%
       filter(town %in% input$which_town) %>%
@@ -117,7 +119,7 @@ server <- function(input, output) {
 
   # Update of genus number "values$genus_sel_nb" for town selection
   observe({
-    print("In obseve values$genus_sel_nb")
+    print("In observe values$genus_sel_nb")
     values$genus_sel_nb <- trees_sf %>%
       st_drop_geometry() %>%
       filter(town %in% input$which_town) %>%
@@ -126,10 +128,30 @@ server <- function(input, output) {
       count() %>%
       as.numeric()
   })
+  
+  # Update of genus number "values$valueBox_tallest" for town selection
+  observe({
+    print("In observe values$valueBox_tallest")
+    values$tallest_tree <- trees_sf %>%
+      st_drop_geometry() %>%
+      filter(town %in% input$which_town) %>%
+      select(height_m) %>%
+      max()
+  })
+  
+  # Update of genus number "values$valueBox_largest" for town selection
+  observe({
+    print("In observe values$valueBox_largest")
+    values$largest_tree <- trees_sf %>%
+      st_drop_geometry() %>%
+      filter(town %in% input$which_town) %>%
+      select(diameter_m) %>%
+      max()
+  })
 
   # Paramétrisation de la carte en fonction de la variable demandée
   eventReactive(input$selection_submit, {
-    print("In obseve values$map_parameters")
+    print("In observe values$map_parameters")
     values$map_parameters <- list(
 
     )
@@ -246,6 +268,37 @@ server <- function(input, output) {
   #------------------------------------------------------------------------------#
   output$trees_nb <- renderText({ paste("Nombre d'arbres pour cette sélection de villes", values$trees_nb, sep = " : ") })
   output$genus_nb <- renderText({ paste("Nombre de genres pour cette sélection de villes", values$genus_sel_nb, sep = " : ") })
+  
+  # ValueBoxes
+  #------------------------------------------------------------------------------#
+  output$valueBox_trees_nb <- renderValueBox({
+    valueBox(
+      value = values$trees_nb,
+      subtitle = "Nombre d'arbres",
+      color = "purple"
+    )
+  })
+  output$valueBox_genus_sel_nb <- renderValueBox({
+    valueBox(
+      value = values$genus_sel_nb,
+      subtitle = "Nombre de genres",
+      color = "orange"
+    )
+  })
+  output$valueBox_tallest <- renderValueBox({
+    valueBox(
+      value = values$tallest_tree,
+      subtitle = "Le plus haut",
+      color = "blue"
+    )
+  })
+  output$valueBox_largest <- renderValueBox({
+    valueBox(
+      value = values$largest_tree,
+      subtitle = "Le plus large (tronc)",
+      color = "maroon"
+    )
+  })
 
   # Map of trees
   #------------------------------------------------------------------------------#

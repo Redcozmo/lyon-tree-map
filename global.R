@@ -90,6 +90,10 @@ trees_sf <- trees_sf %>%
   filter(!common_name %in% undefine_common_name) %>%
   filter(!genus %in% undefine_genus)
 
+# Add diameter
+trees_sf <- trees_sf %>%
+  mutate(diameter_m = round(perimeter_cm / (100 * 3.14159), digits = 2))
+
 # Extract df without geometry
 trees_df <- trees_sf %>%
   st_drop_geometry()
