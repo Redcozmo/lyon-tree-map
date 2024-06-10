@@ -2,11 +2,11 @@
 # User Interface : ui.R
 ################################################################################
 
-# Source UI files
-source('partials/tab_item_parameters.R')
-source('partials/tab_item_graphics.R')
-source('partials/tab_item_map.R')
-source('partials/tab_item_table.R')
+# Source UI partials
+source('partials/ui_tab_item_parameters.R')
+source('partials/ui_tab_item_graphics.R')
+source('partials/ui_tab_item_map.R')
+source('partials/ui_tab_item_table.R')
 
 # Dashboard header
 #------------------------------------------------------------------------------#
@@ -43,10 +43,10 @@ body <- dashboardBody(
     tags$style(".small-box{border-radius: 5px}"),
     
     tabItems(
-      tab_item_parameters,
-      tab_item_map,
-      tab_item_table,
-      tab_item_graphics,
+      ui_tab_item_parameters,
+      ui_tab_item_map,
+      ui_tab_item_table,
+      ui_tab_item_graphics,
       tabItem(tabName = "menu_item_explanation",
               shiny::includeMarkdown(path = "pages/explanation.md")
       ),

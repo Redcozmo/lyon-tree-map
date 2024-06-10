@@ -1,4 +1,4 @@
-tab_item_map <- 
+ui_tab_item_map <- 
   tabItem(tabName = "menu_item_map",
           p(),
           box(width = 8,

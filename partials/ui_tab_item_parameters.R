@@ -1,4 +1,4 @@
-tab_item_parameters <- 
+ui_tab_item_parameters <- 
   tabItem(tabName = "menu_item_params",
           fluidRow(
             box(

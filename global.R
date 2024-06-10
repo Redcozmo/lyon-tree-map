@@ -99,9 +99,7 @@ which_genus_choices <-
   select(genus) %>%
   unique() %>%
   arrange(genus) %>%
-  # droplevels() %>% # For delete unused levels
   pull()
-# levels()
 
 print(which_genus_choices)
 
@@ -114,9 +112,7 @@ which_species_choices <-
   select(species) %>%
   unique() %>%
   arrange(species) %>%
-  # droplevels() %>% # For delete unused levels
   pull()
-# levels()
 
 which_species_default <- which_species_choices
 
