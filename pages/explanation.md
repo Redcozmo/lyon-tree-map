@@ -33,6 +33,10 @@ Lien direct vers la donnée :<br>
 Ces données sont fournies sous licence ouverte
 [Etalab](https://data.grandlyon.com/portail/fr/assets/licences/ETALAB-Licence-Ouverte-v2.0.pdf).
 
+## Source de données additionnelles
+
+Données wikipedia formatées avec url + nom de genre + nom d’espece
+
 ## Nettoyage des données
 
 La base de données comporte 106 710 arbres. Certains arbres ne sont pas
