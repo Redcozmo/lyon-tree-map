@@ -5,18 +5,6 @@
 # Données accessibles sur : data.grandlyon.com
 # https://data.grandlyon.com/portail/fr/jeux-de-donnees/arbres-alignement-metropole-lyon/info
 #
-
-# AMELIORATIONS :
-#
-# - A l'affichage des arbre d'une commune, ajouter l'emprise de la commune
-# - Permettre de choisir quelle variable afficher sur la carte : genre ou hauteur ou date, etc...
-# - Ajouter des messages d'erreur cohérent pour l'utilisateur : https://shiny.posit.co/r/articles/improve/validation/
-#  Récupérer avec les données lidar HD les hauteurs des arbres MAJ
-#  Ajout d'une couche de visualisation de hauteur de canopée calculée avec LidarHD de l'IGN
-#  Ajouter délai de chargement avec animation ou autre
-#  Outils d'affichage en ne sélectionnant que les arbres dont la hauteur est supérieure à une valeur
-#  Ajout fonctionnalité : export de la selection
-#  Ajout fonctionnalité : affichage arbre via decoupe par une emprise
 ################################################################################
 
 # Clear existing objects from workspace and free memory
