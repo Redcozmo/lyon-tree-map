@@ -1,5 +1,9 @@
+.gitignore
 .Rproj.user
 .Rhistory
 .RData
 /data
 /data_source
+/rsconnect
+enhancements_issues.md
+shiny-run.R
