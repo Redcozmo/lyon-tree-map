@@ -104,6 +104,7 @@ which_genus_choices <-
 print(which_genus_choices)
 
 which_genus_default <- c("Quercus")
+which_genus_default <- which_genus_choices
 
 which_species_choices <-
   trees_df %>%

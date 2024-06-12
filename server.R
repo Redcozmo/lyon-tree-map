@@ -20,8 +20,7 @@ server <- function(input, output) {
     largest_tree = NULL,
     loc_found = NULL,
     loc_click = NULL,
-    radius = NULL,
-    color_palette = NULL,
+    radius = NULL
   )
 
   # Render html : solution 2 with tag does not work
