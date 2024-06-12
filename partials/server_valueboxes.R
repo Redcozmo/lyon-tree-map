@@ -1,5 +1,10 @@
 # Update of species number "values$trees_nb" with selection
-observe({
+observeEvent({
+  input$which_town
+  input$which_genus
+  input$which_species
+  input$which_var
+}, {
   print("In observe values$trees_nb")
   values$trees_nb <- trees_sf %>%
     st_drop_geometry() %>%
@@ -11,7 +16,12 @@ observe({
 })
 
 # Update of genus number "values$genus_sel_nb" with selection
-observe({
+observeEvent({
+  input$which_town
+  input$which_genus
+  input$which_species
+  input$which_var
+}, {
   print("In observe values$genus_sel_nb")
   values$genus_sel_nb <- trees_sf %>%
     st_drop_geometry() %>%
@@ -25,7 +35,12 @@ observe({
 })
 
 # Update of genus number "values$valueBox_tallest" with selection
-observe({
+observeEvent({
+  input$which_town
+  input$which_genus
+  input$which_species
+  input$which_var
+}, {
   print("In observe values$valueBox_tallest")
   values$tallest_tree <- trees_sf %>%
     st_drop_geometry() %>%
@@ -37,7 +52,12 @@ observe({
 })
 
 # Update of genus number "values$valueBox_largest" with selection
-observe({
+observeEvent({
+  input$which_town
+  input$which_genus
+  input$which_species
+  input$which_var
+}, {
   print("In observe values$valueBox_largest")
   values$largest_tree <- trees_sf %>%
     st_drop_geometry() %>%
