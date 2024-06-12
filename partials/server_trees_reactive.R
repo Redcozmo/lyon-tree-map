@@ -19,6 +19,9 @@ trees <- eventReactive(input$selection_submit, {
     trees <- trees_sf %>%
       dplyr::filter(genus %in% input$which_genus) %>%
       dplyr::filter(species %in% input$which_species) %>%
+      dplyr::filter(between(!!input$which_var,
+                            left = input$var_select_min,
+                            right = input$var_select_max)) %>%
       sf::st_intersection(st_buffer(loc_point, dist = values$radius))
     print(paste("Nombre d'arbres sélectionnés", length(trees$common_name), sep = " : "))
     
@@ -38,7 +41,10 @@ trees <- eventReactive(input$selection_submit, {
     trees <- trees_sf %>%
       dplyr::filter(town %in% input$which_town) %>%
       dplyr::filter(genus %in% input$which_genus) %>%
-      dplyr::filter(species %in% input$which_species)
+      dplyr::filter(species %in% input$which_species) %>%
+      dplyr::filter(between(!!input$which_var,
+                            left = input$var_select_min,
+                            right = input$var_select_max))
     return(trees)
   } else {
     print("autre condition ?")

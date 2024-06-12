@@ -47,7 +47,7 @@ ui_tab_item_parameters <-
                           choices = which_genus_choices,
                           selected = which_genus_default,
                           multiple = TRUE,
-                          selectize = FALSE, # FALSE because not compatible with size
+                          selectize = FALSE,
                           size = 5
               ),
               
@@ -56,33 +56,27 @@ ui_tab_item_parameters <-
                           choices = which_species_choices,
                           selected = which_species_default,
                           multiple = TRUE,
-                          selectize = FALSE, # FALSE because not compatible with size
+                          selectize = FALSE,
                           size = 5),
             ),
             
             box(
               width = 4,
-              title = p("3. Sélection de la variable à afficher", style = 'font-weight:bold;'),
-              p("A venir")
-              # varSelectInput(
-              #   inputId = "which_var",
-              #   label = "Selection de la variable :",
-              #   selected = "height_m",
-              #   data = trees_sf %>%
-              #     st_drop_geometry() %>%
-              #     dplyr::select(c("genus", "town",
-              #                     "perimeter_cm", "height_m",
-              #                     "plantation_date")
-              #     )
-              # ),
-              #
-              # selectInput(
-              #   inputId = "which_color",
-              #   label = "Couleur de la palette :",
-              #   choices = c("Noir" = "Black", "Vert" = "Greens", "Bleu" = "Blues",
-              #               "viridis", "magma", "inferno", "plasma"),
-              #   selected = "Noir"
-              # )
+              title = p("3. Filtrer par variable", style = 'font-weight:bold;'),
+              varSelectInput(
+                inputId = "which_var",
+                label = "Selection de la variable :",
+                selected = "height_m",
+                data = trees_sf %>%
+                  st_drop_geometry() %>%
+                  dplyr::select(c("crown_diameter_m",
+                                  "diameter_m",
+                                  "height_m",
+                                  "plantation_date")
+                  )
+              ),
+              uiOutput("var_select_min"),
+              uiOutput("var_select_max")
             ),
             
             box(
